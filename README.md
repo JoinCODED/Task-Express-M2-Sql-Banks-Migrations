@@ -1,33 +1,50 @@
-# TASK-NAME
+# Banking API Migrations 🏦
 
-This is the template for tasks. These repos are the starting points and instructions for students to explore a concept.
+In this task, you will create a new field in your model, and create a migration file for it.
 
 ## Instructions
-- Fork and clone [this repository](https://github.com/JoinCODED/{REPO_NAME}) to your `Development` folder.
 
-## Objective and end result
-- Write the objective of the task.
-- If there are any images, make sure you resize them to around 880px maximum width. **Don't add big images**
+- If you need a starting point, fork and clone [this repository](https://github.com/JoinCODED/Task-Express-M2-Sql-Banks-Migrations) to your `Development` folder.
 
-![screenshot](https://tenor.com/xNjE.gif)
+## Steps
 
+1. Create a new field in your model:
 
-### 🍋 The basic challenge title
+```js
+const AccountModel = (sequelize, DataTypes) => {
+  const Account = sequelize.define('Account', {
+    username: {
+      type: DataTypes.STRING,
+    },
+    funds: {
+      type: DataTypes.INTEGER,
+    },
+    phone: {
+      type: DataTypes.STRING,
+    },
+  });
+  return Account;
+};
 
-- Step 1
-- Step 2
-- Step 3
+module.exports = AccountModel;
+```
 
+2. Create a migration file:
 
-### 🤼‍♂️ The hard challenge title
+```shell
+npx sequelize-cli migration:create --name modify_account_add_phone_field
+```
 
-- Step 1
-- Step 2
-- Step 3
+3. This will generate a migration file named `20190402212056-modify_account_add_phone_field.js` in the `migrations` folder.
+4. Open that file and modify it to add the phone field.
+5. Run the migration command:
 
+```shell
+   npx sequelize-cli db:migrate
+```
 
-### 🌶 The Extreme challenge title 
+6. To undo the migration, run:
 
-- Step 1
-- Step 2
-- Step 3
+```shell
+   npx sequelize-cli db:migrate:undo
+```
